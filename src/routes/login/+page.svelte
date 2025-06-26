@@ -11,6 +11,7 @@
   import { Input } from '$lib/components/ui/input'
   import { Label } from '$lib/components/ui/label'
   import { enhance } from '$app/forms'
+  import { invalidateAll } from "$app/navigation";
 
   let email = ''
   let password = ''
@@ -42,18 +43,25 @@
     error = err.message
   } else {
     // Redirect on success
-    goto('/dashboard') // change this to your desired route
+    goto('/dashboard')
   }
   }
+
+  supabase.auth.onAuthStateChange(async (event, session) => {
+		if(event == 'SIGNED_IN'){
+			invalidateAll();
+		}
+		if(event == "SIGNED_OUT"){
+			await goto("/login");
+			invalidateAll();
+		}
+	});
 </script>
 
 
 <!-- Background -->
 <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-white to-blue-200 px-4 font-sans relative">
-  <!-- Brand mark -->
-  <div class="absolute top-10 text-6xl font-extrabold text-primary/10 select-none pointer-events-none z-0">
-    Eventure
-  </div>
+
 
   <!-- Card -->
   <Card
@@ -90,7 +98,7 @@
         <div class="absolute w-full h-px bg-muted -z-0" />
       </div>
 
-      <Button onclick={handleGoogleClick} variant="outline" class="w-full border-muted hover:bg-blue-50 text-primary">
+      <Button onclick={handleGoogleClick} variant="outline" class="w-full border-muted hover:bg-indigo-600 text-primary">
         <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512" fill="currentColor">
           <path
             d="M488 261.8C488 403.3 391.1 504 248 504..."
@@ -98,6 +106,10 @@
         </svg>
         Login with Google
       </Button>
+      <p class="text-sm text-muted-foreground text-center">
+        Don't have an account?
+        <a href="/signup" class="text-primary hover:underline">Sign Up</a>
+      </p>
     </CardContent>
   </Card>
 </div>

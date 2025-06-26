@@ -9,7 +9,7 @@
 
 <nav class="sticky top-0 z-50 flex h-16 items-center justify-between bg-gradient-to-r from-indigo-900 via-indigo-700 to-indigo-900 text-white px-6 shadow-xl backdrop-blur-md border-b border-indigo-800">
 	<!-- Brand -->
-	<a href="/" class="text-2xl font-bold text-white no-underline transition-colors duration-200 hover:text-background">
+	<a href="/" class="text-3xl font-medium font-dmserif text-white no-underline transition-colors duration-200 hover:text-background" style="font-family: 'DM Serif Display', 'serif;">
 		Eventure
 	</a>
 
@@ -41,7 +41,7 @@
 			<a href="/contact" class="font-medium text-background transition-colors duration-200 hover:text-white">Contact</a>
 			<span class="h-6 w-px bg-muted"></span>
 			<a href="/login" class="font-medium text-background transition-colors duration-200 hover:text-white">Login</a>
-			<a href="/register" class="rounded-md bg-white px-4 py-2 font-medium text-indigo-600 transition-colors duration-200 hover:bg-muted hover:text-indigo-900">
+			<a href="/signup" class="rounded-md bg-white px-4 py-2 font-medium text-indigo-600 transition-colors duration-200 hover:bg-muted hover:text-indigo-900">
 				Register
 			</a>
 		</div>
@@ -66,7 +66,7 @@
 
 	<!-- Mobile Sidebar -->
 <div
-	class={`fixed top-0 right-0 z-40 w-72 bg-gradient-to-b from-indigo-900 via-indigo-800 to-indigo-900 text-white shadow-xl transition-all duration-300 ease-in-out ${
+	class={`fixed top-0 right-0 z-40 w-72 bg-gradient-to-b from-indigo-900 via-indigo-800 to-indigo-900 text-white md:hidden  shadow-xl transition-all duration-300 ease-in-out ${
 		sidebarActive ? 'translate-x-0' : 'translate-x-full'
 	}`}
 	style="height: calc(100vh - 4rem);"
