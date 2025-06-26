@@ -1,6 +1,26 @@
 <script lang="ts">
   import { supabase } from '$lib/supabaseClient'
   import { Button } from '$lib/components/ui/button'
+  import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+    CardDescription
+  } from '$lib/components/ui/card'
+  import { Input } from '$lib/components/ui/input'
+  import { Label } from '$lib/components/ui/label'
+  import { enhance } from '$app/forms'
+
+  let email = ''
+  let password = ''
+  let error: string | null = null
+
+  function handleGoogleClick(event: Event) {
+  event.preventDefault();
+  loginWithGoogle();
+}
+
 
   async function loginWithGoogle() {
     await supabase.auth.signInWithOAuth({
@@ -10,26 +30,79 @@
       }
     })
   }
+
+  async function loginWithEmail(event: Event) {
+    event.preventDefault()
+    const { error: err } = await supabase.auth.signInWithPassword({
+      email,
+      password
+    })
+    error = err?.message || null;
+     if (err) {
+    error = err.message
+  } else {
+    // Redirect on success
+    goto('/dashboard') // change this to your desired route
+  }
+  }
 </script>
 
-<div class="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-background">
-  <div class="p-6 rounded-2xl shadow-lg bg-white dark:bg-card space-y-4 text-center">
-    <h1 class="text-2xl font-bold">Welcome Back</h1>
-    <p class="text-muted-foreground">Sign in to continue</p>
-    <Button onclick={loginWithGoogle} variant="outline" class="w-full">
-      <svg
-        class="w-5 h-5 mr-2"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 488 512"
-        fill="currentColor"
-      >
-        <path
-          d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123.1 24.3 166.2 63.9l-67.6 64.6C309.2 93.3 281.1 80 248 80c-88.2 0-159.8 74.8-159.8 176S159.8 432 248 432c80.4 0 131.3-47.3 137.4-113.8H248v-91.3h240z"
-        />
-      </svg>
-      Login with Google
-    </Button>
+
+<!-- Background -->
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-white to-blue-200 px-4 font-sans relative">
+  <!-- Brand mark -->
+  <div class="absolute top-10 text-6xl font-extrabold text-primary/10 select-none pointer-events-none z-0">
+    Eventure
   </div>
+
+  <!-- Card -->
+  <Card
+    class="relative z-10 w-full max-w-md border border-muted shadow-xl bg-card backdrop-blur-md transition-transform hover:animate-card-hover rounded-2xl"
+  >
+    <CardHeader class="text-center space-y-2">
+      <CardTitle class="text-3xl font-bold text-primary">Welcome to Eventure</CardTitle>
+      <CardDescription class="text-gray-500">Sign in to continue</CardDescription>
+    </CardHeader>
+
+    <CardContent class="space-y-5">
+      <form use:enhance on:submit={loginWithEmail} class="space-y-4">
+        <div class="space-y-1">
+          <Label for="email">Email</Label>
+          <Input id="email" type="email" bind:value={email} required />
+        </div>
+
+        <div class="space-y-1">
+          <Label for="password">Password</Label>
+          <Input id="password" type="password" bind:value={password} required />
+        </div>
+
+        <Button type="submit" class="w-full bg-primary text-primary-foreground hover:bg-blue-700">
+          Login with Email
+        </Button>
+
+        {#if error}
+          <p class="text-sm text-red-500 text-center">{error}</p>
+        {/if}
+      </form>
+
+      <div class="relative flex items-center justify-center">
+        <span class="bg-card px-2 text-sm text-gray-400 z-10">or</span>
+        <div class="absolute w-full h-px bg-muted -z-0" />
+      </div>
+
+      <Button onclick={handleGoogleClick} variant="outline" class="w-full border-muted hover:bg-blue-50 text-primary">
+        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512" fill="currentColor">
+          <path
+            d="M488 261.8C488 403.3 391.1 504 248 504..."
+          />
+        </svg>
+        Login with Google
+      </Button>
+    </CardContent>
+  </Card>
 </div>
+
+
+
 
 
