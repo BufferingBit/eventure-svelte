@@ -106,7 +106,7 @@
 				<hr class="my-4 border-muted" />
 
 			<a href="/login" onclick={toggleSidebar} class="block px-4 py-3 rounded-lg text-white hover:bg-indigo-800 hover:text-blue-300">Login</a>
-      <a href="/register" onclick={toggleSidebar} class="block px-4 py-3 rounded-lg bg-blue-500 text-white text-center hover:bg-blue-600">Register</a>
+      <a href="/signup" onclick={toggleSidebar} class="block px-4 py-3 rounded-lg bg-blue-500 text-white text-center hover:bg-blue-600">Register</a>
 
       </nav>
 		</div>

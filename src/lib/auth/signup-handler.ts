@@ -13,7 +13,6 @@ export async function handleNewUser(user: { id: string; email: string; user_meta
     course: null,
     branch: null,
     college_id: null,
-    role_tag: 'user'
   })
 }
 
