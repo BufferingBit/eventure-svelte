@@ -1,10 +1,25 @@
+import { createClient } from '@supabase/supabase-js';
+import { browser } from '$app/environment';
 
-import { createClient } from "@supabase/supabase-js";
-import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from "$env/static/public"
+import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
 
-const supabaseUrl = PUBLIC_SUPABASE_URL;
-const supabaseKey = PUBLIC_SUPABASE_ANON_KEY;
+export const supabase = createClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true,
+    flowType: 'pkce' // Recommended for SvelteKit
+  },
+  global: {
+    headers: {
+      'X-Client-Info': 'eventure'
+    }
+  }
+});
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
 
-
+export async function getAuthHeaders() {
+  if (!browser) return {};
+  const session = (await supabase.auth.getSession()).data.session;
+  return session ? { Authorization: `Bearer ${session.access_token}` } : {};
+}

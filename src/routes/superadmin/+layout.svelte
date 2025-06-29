@@ -1,14 +1,10 @@
 <script lang="ts">
- import * as Sidebar from "$lib/components/ui/sidebar/index.js";
- import CollegeSidebar from "$lib/components/college-sidebar.svelte";
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { loadUserRole } from '$lib/utils/role';
 
- let { children } = $props();
 </script>
 
-<Sidebar.Provider >
- <CollegeSidebar />
- <main>
-  <Sidebar.Trigger />
-  {@render children?.()}
- </main>
-</Sidebar.Provider>
+
+<slot />
+

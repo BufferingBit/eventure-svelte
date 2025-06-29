@@ -1,55 +1,53 @@
 @import "tailwindcss";
-
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
   --radius: 0.625rem;
 
-  /* Base colors */
-  --background: oklch(0.985 0.001 270); /* light indigo-blue */
-  --foreground: oklch(0.2 0.03 270);    /* dark text */
+  /* Light Mode Colors */
+  --background: oklch(0.99 0.001 270); /* Pure white with blue tint */
+  --foreground: oklch(0.22 0.03 270);  /* Deep indigo text */
 
   /* Cards & Popovers */
-  --card: oklch(0.97 0.01 270);
+  --card: oklch(0.98 0.005 270);       /* Slightly off-white */
   --card-foreground: var(--foreground);
   --popover: var(--card);
-  --popover-foreground: var(--card-foreground);
+  --popover-foreground: var(--foreground);
 
-  /* Primary (text & actions) */
-  --primary: oklch(0.33 0.05 270); /* indigo-700 */
-  --primary-foreground: oklch(0.985 0.001 270); /* white */
+  /* Primary (indigo-600) */
+  --primary: oklch(0.5 0.15 270);
+  --primary-foreground: oklch(0.99 0.001 270);
 
-  /* Secondary (background accents) */
-  --secondary: oklch(0.9 0.01 270); /* indigo-100 */
-  --secondary-foreground: oklch(0.22 0.03 270); /* indigo-900 */
+  /* Secondary (gray-100) */
+  --secondary: oklch(0.96 0.01 270);
+  --secondary-foreground: oklch(0.25 0.03 270);
 
-  /* Muted */
-  --muted: var(--secondary);
-  --muted-foreground: oklch(0.5 0.02 270);
+  /* Muted (gray-300) */
+  --muted: oklch(0.88 0.01 270);
+  --muted-foreground: oklch(0.55 0.02 270);
 
-  /* Accent */
-  --accent: oklch(0.6 0.08 270); /* blue-500 */
+  /* Accent (indigo-500) */
+  --accent: oklch(0.55 0.15 270);
   --accent-foreground: var(--primary-foreground);
 
-  /* Danger / Destructive */
-  --destructive: oklch(0.6 0.2 30); /* red-500-ish */
-  --border: oklch(0.85 0.01 270);
-  --input: var(--border);
-  --ring: oklch(0.5 0.05 270); /* blue ring */
+  /* Danger */
+  --destructive: oklch(0.65 0.2 30);
+  --border: oklch(0.9 0.01 270);      /* Light gray border */
+  --input: oklch(0.95 0.01 270);       /* Input background */
+  --ring: oklch(0.55 0.15 270);        /* Matching accent */
 
-  /* Chart colors (leave as-is or customize) */
+  /* Chart colors */
   --chart-1: oklch(0.6 0.2 280);
   --chart-2: oklch(0.6 0.1 200);
   --chart-3: oklch(0.45 0.05 230);
   --chart-4: oklch(0.75 0.15 90);
   --chart-5: oklch(0.7 0.15 70);
 
-  /* Sidebar (match navbar) */
-  --sidebar: var(--background);
+  /* Sidebar */
+  --sidebar: var(--card);
   --sidebar-foreground: var(--foreground);
   --sidebar-primary: var(--primary);
   --sidebar-primary-foreground: var(--primary-foreground);
@@ -59,39 +57,48 @@
   --sidebar-ring: var(--ring);
 }
 
-
 .dark {
-  --background: oklch(0.2 0.03 270);   /* dark indigo */
-  --foreground: oklch(0.985 0.001 270); /* white */
-  --card: oklch(0.25 0.03 270);
+  /* Dark Mode Colors */
+  --background: oklch(0.15 0.02 270);  /* Deep indigo */
+  --foreground: oklch(0.95 0.005 270); /* Off-white */
+
+  /* Cards & Popovers */
+  --card: oklch(0.18 0.02 270);       /* Slightly lighter than background */
   --card-foreground: var(--foreground);
   --popover: var(--card);
   --popover-foreground: var(--foreground);
 
-  --primary: oklch(0.85 0.01 270);     /* light */
-  --primary-foreground: var(--background);
+  /* Primary (indigo-400) */
+  --primary: oklch(0.7 0.1 270);
+  --primary-foreground: oklch(0.15 0.02 270);
 
-  --secondary: oklch(0.3 0.02 270);
+  /* Secondary (gray-800) */
+  --secondary: oklch(0.25 0.02 270);
   --secondary-foreground: var(--foreground);
 
+  /* Muted (gray-600) */
   --muted: oklch(0.35 0.01 270);
   --muted-foreground: oklch(0.7 0.01 270);
 
-  --accent: oklch(0.6 0.08 270);       /* blue-500 */
+  /* Accent (indigo-500) */
+  --accent: oklch(0.55 0.15 270);
   --accent-foreground: var(--foreground);
 
+  /* Danger */
   --destructive: oklch(0.65 0.2 30);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.65 0.08 270);
+  --border: oklch(0.25 0.02 270);      /* Dark gray border */
+  --input: oklch(0.2 0.02 270);        /* Input background */
+  --ring: oklch(0.55 0.15 270);        /* Matching accent */
 
+  /* Chart colors */
   --chart-1: oklch(0.5 0.2 270);
   --chart-2: oklch(0.7 0.15 200);
   --chart-3: oklch(0.8 0.15 70);
   --chart-4: oklch(0.6 0.2 300);
   --chart-5: oklch(0.6 0.15 20);
 
-  --sidebar: var(--background);
+  /* Sidebar */
+  --sidebar: var(--card);
   --sidebar-foreground: var(--foreground);
   --sidebar-primary: var(--primary);
   --sidebar-primary-foreground: var(--primary-foreground);
@@ -100,7 +107,6 @@
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
 }
-
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -145,6 +151,27 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Smooth transitions for theme changes */
+  html.dark-transition,
+  html.dark-transition * {
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  /* DM Serif Display font for brand elements */
+  .font-dmserif {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* Enhanced focus states */
+  [type="text"]:focus, [type="email"]:focus, [type="url"]:focus, [type="password"]:focus,
+  [type="number"]:focus, [type="date"]:focus, [type="datetime-local"]:focus, [type="month"]:focus,
+  [type="search"]:focus, [type="tel"]:focus, [type="time"]:focus, [type="week"]:focus,
+  [multiple]:focus, textarea:focus, select:focus {
+    @apply ring-2 ring-ring ring-offset-2 ring-offset-background;
   }
 }

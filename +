@@ -35,15 +35,7 @@
         supabase.from('clubs').select('*', { count: 'exact', head: true }).eq('college_id', collegeId),
         supabase.from('events').select('*', { count: 'exact', head: true }).eq('college_id', collegeId),
         supabase.from('college_followers').select('*', { count: 'exact', head: true }).eq('college_id', collegeId),
-          supabase
-  .from('college_admins')
-  .select(`
-    admin_id,
-    college_id,
-    created_at,
-    user:admin_id (name, email, profile_picture as avatar_url)
-  `)
-  .eq('college_id', collegeId),
+        supabase.from('college_admins').select('id, name, email, avatar_url').eq('college_id', collegeId),
         supabase.from('events').select('id, title, date, banner_url').eq('college_id', collegeId).order('date', { ascending: false }).limit(5),
         supabase.from('clubs').select('id, name, logo_url, description').eq('college_id', collegeId).order('name', { ascending: true }).limit(5)
       ]);

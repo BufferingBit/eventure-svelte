@@ -7,4 +7,5 @@ export const load: LayoutLoad = async () => {
   } = await supabase.auth.getSession()
 
   return { session }
+
 }

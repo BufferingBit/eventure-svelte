@@ -5,3 +5,9 @@
   Custom themed box
 </div>
 
+<a href="/superadmin">Superadmin</a>
+
+<a href="/superadmin/college">Superadmin College</a>
+<a href="/superadmin/clubs">Superadmin Clubs</a>
+<a href="/superadmin">Superadmin</a>
+
